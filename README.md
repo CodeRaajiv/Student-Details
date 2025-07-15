@@ -34,7 +34,7 @@ student-details-form/
 (https://coderaajiv.github.io/Student-Details/)
 
 💡 Use Case
-This project is ideal for beginners learning how to:
+This project is ideal for Basic form:
 
 1.Create forms in HTML
 
