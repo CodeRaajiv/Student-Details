@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Details</title>
+</head>
+<body>
+  <h1>Student Details</h1>
+
+  <form id="studentForm">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Age: <input type="number" name="age" required></label><br>
+
+    <label>Gender:</label>
+    <input type="radio" name="Gender" value="Male" required> Male
+    <input type="radio" name="Gender" value="Female"> Female
+    <input type="radio" name="Gender" value="Others"> Others <br>
+
+    <label>Course:
+      <select name="Course" required>
+        <option value="">--Select--</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="React">React</option>
+        <option vlaue="Node">Node</option>
+        <option value="Python">Python</option>
+      </select>
+    </label>
+    <br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>Address: <textarea name="address" required></textarea></label><br>
+
+    <label>Education:</label>
+    <input type="radio" name="education" value="UG" required> UG
+    <input type="radio" name="education" value="PG"> PG 
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  <br>
+  <br>
+  <table border="1" id="tableinfo">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Education</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById("studentForm");
+    const tableBody = document.getElementById("tableinfo").getElementsByTagName("tbody")[0];
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const user = {
+        name: formData.get("name"),
+        age: formData.get("age"),
+        gender: formData.get("Gender"),
+        course: formData.get("Course"),
+        email: formData.get("email"),
+        address: formData.get("address"),
+        education: formData.get("education")
+      };
+
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.age}</td>
+        <td>${user.gender}</td>
+        <td>${user.course}</td>
+        <td>${user.email}</td>
+        <td>${user.address}</td>
+        <td>${user.education}</td>
+        <td><button class="deleteBtn">Delete</button></td>
+      `;
+
+      tableBody.appendChild(newRow);
+
+
+      newRow.querySelector(".deleteBtn").addEventListener("click", function () {
+        tableBody.removeChild(newRow);
+      });
+
+      form.reset();
+    });
+  </script>
+</body>
